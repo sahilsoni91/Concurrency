@@ -1,0 +1,72 @@
+Thread:
+- The concurrent tasks that run inside a process are called threads.
+
+Concurrency and Parallelism:
+- Concurrency when you execute your application with multiple threads in a single-core processor, so simultaneously you can see when your program execution is apparent. 
+  Parallelism when you execute your application with multiple threads in a multi-core processor or in a computer with more than one processor.
+
+- Concurrency when the threads of the application are executed without a predefined order.
+  Parallelism when you use various threads, where all these threads are executed in an ordered way.
+
+Thread Creation:
+- By implementing Runnable interface
+- By extending Thread class
+
+** If we call System.exit(); function from any thread started from main thread than all thread will be terminated.
+** Creating object of Thread class or calling run() method of Runnable interface or Thread class will not create a new execution Thread. Only by calling start() method of 
+   Thread class will create a new execution Thread.
+   
+Thread Attributes:
+- ID : Stores unique identifier for each Thread
+- Name : Stores name of Thread
+- Priority : Stores priority of Thread. Range is 1 to 10 where 1 is least and 10 is highest priority. Not recommended to change but we can change it.
+- Status : Stores status of Thread. Possible values of status are (new, runnable, blocked, waiting, time waiting or terminated)
+
+** Thread class have one enum defined in it by name State which have all status of Thread.
+
+- Thread class not implement setID() and setStatus() methods because it is handled by JVM itself.
+
+- setPriority() method throws IllegalArgumentException if the value of priority passed is not in range of 1 to 10.
+
+- Thread class has an atribute which stores boolean value to check whether the thread is interrupted or not. When call interrupt() method of Thread class it only sets the 
+  value of that attribute to true. The isInterrupted() instance method only returns the value of that attribute.
+
+- There is one static method interrupted() which is also used to check whether the thread is interrupted or not.
+
+** Difference between isInterrupted() and interrupted() method is that the isInterrupted() method doesn't change the value of interrupt attribute but interrupt() method 
+   sets the value to false after interruption of thread. isInterrupted() method is recommended to use.
+   
+- sleep() method of Thread class makes a Thread object to leave the CPU. yield() is another method of Thread class to leave the CPU.
+
+- join() method of Thread class when called from a thread on a thread object than the called thread will wait until the completion of thread object job on which it is 
+  called. E.g.: If the object thread1 has the code, thread2.join(), the thread thread1 suspends its execution until completion of thread2 or if thread2 is not interrupted.
+
+- setDaemon() method of Thread class before the call of start() method of Thread class.
+
+** We can't modify daemon status once the thread is running.
+
+- isDaemon() method of Thread class is used to get the daemon status of Thread.
+
+- When a checked exception is thrown inside the run() method of a Thread object, we have to catch and treat them, because the run() method doesn't accept a throws clause.
+
+- When an unchecked exception is thrown inside the run() method of a Thread object, the default behaviour is to write the stack trace in the console and exit the program. 
+  Java provides us with a mechanism to catch and treat the unchecked exceptions thrown in a Thread object to avoid the program ending.
+
+- When an unchecked exception is thrown in a thread and is not caught, the JVM checks if the thread has an uncaught exception handler set by the corresponding method of 
+  Thread class object. If it has set the exception handler, the JVM invokes this method with the Thread object and Exception as arguments.
+
+- If the thread has not got an uncaught exception handler, the JVM prints the stack trace in the console and returns from that thread.
+
+- The Thread class has another method related to the process of uncaught exceptions. It's the static method setDefaultUncaughtExceptionHandler() that establishes an 
+  exception handler for all the Thread objects in the application.
+
+** Order of unchecked uncaught exception handler in a thread:
+   - First, it looks for the uncaught exception handler of the Thread objects i.e. setUncaughtExceptionHandler() method
+   - Second, it looks for the uncaught exception handler for ThreadGroup of the Thread objects
+   - Third, it looks for the default uncaught exception handler i.e. Thread.setDefaultUncaughtExceptionHandler() method
+
+
+   
+
+
+
